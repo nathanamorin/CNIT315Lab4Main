@@ -1,0 +1,23 @@
+
+
+Generall Tests ...
+-----------------------------------------------------------------
+Find Length Function function ---- did not return the correct result
+
+Find Vowels Function function ---- did not return the correct result
+
+Find Number of Words Function function ---  passed all tests.
+
+Test if char is alpha-numeric function ---  passed all tests.
+
+Create Substring function function ---  passed all tests.
+
+Contatenate Function function ---- failed to run.
+
+Remove Word Function function ---  passed all tests.
+
+
+
+Extra Targeted Testing ...
+-----------------------------------------------------------------
+ALL PASS
