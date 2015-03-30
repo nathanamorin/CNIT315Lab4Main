@@ -234,7 +234,6 @@ int concatenateStrings(char* str1, char* str2)
 	{
 		//printf("Copying - '%c'\n",str2[secondArrayLength]);
     str1[firstArrayLength] = str2[secondArrayLength];
-    printf("%c\n", str1[firstArrayLength]);
     secondArrayLength++;
     firstArrayLength++;
 	}

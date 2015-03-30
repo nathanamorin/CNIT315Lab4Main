@@ -33,7 +33,6 @@ int main(){
 	// int *array = (int*)malloc(arrayElements*sizeof(int));
 	char array[100];
 	askQuestionString(array,"Please enter a string to start : ");
-	printf("%s\n", array);
 	
 	//Define function pointer for handling each item that can be called
 	typedef int (*item_handler)(char *array);
@@ -61,12 +60,7 @@ int main(){
 		else if (response >= 0 && response < numFunctions)
 		{
 			(item_handler)funcs[response](array);
-			printf("%s\n", array);
 		}
-
-
-
-
 
 	}
 }
@@ -80,25 +74,24 @@ int wordCount_handler(char *array)
 {
 	int numWords = 0;
 	wordCount(array, &numWords);
-	printf("Number of Words %d\n", numWords);
+	//printf("Number of Words %d\n", numWords);
 
 	return 0;
 }
 
 int wordRemove_handler(char *array)
 {
-	printf("Start to remove word\n");
 	char wordToRemove[1000];
 	char sentence[1000];
-	askQuestionString(sentence,"Enter a word to remove");
+	askQuestionString(sentence,"Enter a sentence");
 	askQuestionString(wordToRemove,"Enter a word to remove");
 	// printf("Enter Sentence : \n");
 	// scanf("%[^\n]s", sentence);
 	// printf("Enter Word : \n");
 	// scanf("%[^\n]s", wordToRemove);
-	printf("Sentence - %s Word - %s\n", sentence,wordToRemove);
+	//printf("Sentence - %s Word - %s\n", sentence,wordToRemove);
 	wordRemove(sentence, wordToRemove);
-	printf("Array after '%s' removed -- %s\n",wordToRemove, sentence);
+	printf("Sentence after '%s' removed -- %s\n",wordToRemove, sentence);
 
 	return 0;
 }
@@ -107,7 +100,7 @@ int vowelCheck_handler(char *array)
 {
 	int vowels = 0;
 	vowelCheck(array, &vowels);
-	printf("Number of vowels %d\n", vowels);
+	//printf("Number of vowels %d\n", vowels);
 
 	return 0;
 }
