@@ -90,12 +90,13 @@ int wordRemove_handler(char *array)
 	printf("Start to remove word\n");
 	char wordToRemove[1000];
 	char sentence[1000];
-	//askQuestionString(sentence,"Enter a word to remove");
-	//askQuestionString(wordToRemove,"Enter a word to remove");
-	printf("Enter Sentence : \n");
-	scanf("\n%[^\n]s", sentence);
-	printf("Enter Word : \n");
-	scanf("\n%[^\n]s", wordToRemove);
+	askQuestionString(sentence,"Enter a word to remove");
+	askQuestionString(wordToRemove,"Enter a word to remove");
+	// printf("Enter Sentence : \n");
+	// scanf("%[^\n]s", sentence);
+	// printf("Enter Word : \n");
+	// scanf("%[^\n]s", wordToRemove);
+	printf("Sentence - %s Word - %s\n", sentence,wordToRemove);
 	wordRemove(sentence, wordToRemove);
 	printf("Array after '%s' removed -- %s\n",wordToRemove, sentence);
 
@@ -130,14 +131,14 @@ int subString_handler(char *array)
 int concatStrings_handler(char *array)
 {
 
-	char one[7], two[7];
+	char one[100], two[100];
 	if (askQuestionString(one,"Input first of string") == 1 || 
 		askQuestionString(two,"Input second of string") == 1)
 	{
 		return 1;
 	}
 
-	printf("%s -- %s\n", one, two);
+	//printf("%s -- %s\n", one, two);
 	concatenateStrings(one, two);
 	printf("Concatenated Strings -- %s\n", one);
 

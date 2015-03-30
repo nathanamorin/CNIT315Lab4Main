@@ -80,8 +80,9 @@ int testFindLength()
 	for (i=0; i<numArrays; i++)
 	{
 		strLength = strings[i].length;
-		char *string = malloc(strLength);
+		char *string = malloc(strLength*sizeof(char));
 		string = strings[i].value;
+		strLength = strlen(string);
 		//printf("%s\n", strings[0].value);
 		// int i =0;
 		// while (string[i] != '\0')
@@ -93,6 +94,7 @@ int testFindLength()
 
 		//Use Function to find length of string
 		returnValue = printStringWLen(string, &strLengthResponse);
+		//printf("Length - %d Returned Length %d\n", strLength,strLengthResponse);
 
 		if (returnValue != 0)
 		{
@@ -117,13 +119,15 @@ int testFindLength()
 int testVowels()
 {
 	//Vars
-	int i,e,numVowels, strLength, strVowelResponse = -5, returnValue;
+	int i,e,numVowels, strLength, strVowelResponse , returnValue;
 	for (e=0; e<numArrays; e++)
 	{
 		loadArrays();
 		strLength = strings[e].length;
 		char *string = malloc(strLength);
 		string = strings[e].value;
+		numVowels = 0;
+		strVowelResponse = NULL;
 		//Find number of vowels
 		//Source -- http://www.programiz.com/c-programming/examples/vowel-consonant-frequency-string
 		for(i=0; string[i]!='\0'; i++) 
@@ -135,12 +139,13 @@ int testVowels()
 		}
 		//Use Function to find length of string
 		returnValue = vowelCheck(string, &strVowelResponse);
-		printf("======%d\n", strVowelResponse);
+		//printf("Num Vowels Response -- %d\n", strVowelResponse);
+		//printf("Num Vowels -- %d\n", numVowels);
 		if (returnValue != 0)
 		{
 			return 1;
 		}
-		if (strVowelResponse == -5)
+		if (strVowelResponse == NULL)
 		{
 			return -2;
 		}
@@ -167,14 +172,13 @@ int testNumberWords()
 		strLength = strings[e].length;
 		char *string = malloc(strLength);
 		string = strings[e].value;
+		string[0] = 'A';
 		numWords = 1;
 		//Find number of Words
+		strWordResponse = 0;
 		for(i=1;string[i]!='\0';i++) 
 		{ 
-			if(((string[i]==' ' && string[i-1]!=' ') ||
-					(string[i]=='\t' && string[i-1]!='\t') ||
-					 (string[i]=='_' && string[i-1]!= '_')) && 
-				i <= strLength) 
+			if((string[i]==' ' && string[i-1]!=' ')) 
 			{
 				numWords++;
 			}
@@ -182,6 +186,7 @@ int testNumberWords()
 
 		//Use Function to find length of string
 		returnValue = wordCount(string, &strWordResponse);
+
 		printf("\n\n%s\n NUMBER OF WORDS my %d theirs %d\n\n", string, numWords,strWordResponse);
 
 		if (returnValue != 0)
@@ -254,12 +259,13 @@ int testSubString()
 	char string[] = "lucille";
 	subString(string, 2, 5);
 
-	printf("Testing Sub String -- %s\n", string);
+	
 	
 	// use strcmp(check,input) != 0 
 	//source :: http://stackoverflow.com/questions/8004237/how-do-i-properly-compare-strings-in-c
-	if (strcmp(string, "cill") == 0)
+	if (strcmp(string, "cill") != 0)
 	{
+		printf("Testing Sub String -- %s\n", string);
 		return -1;
 	}
 	
@@ -274,36 +280,25 @@ int testSubString()
 int testConcat()
 {
 	//Vars
-	int e, strLength, returnValue;
-	int length1, length2, totalLength;
-	for (e=0; e<numArrays; e++)
+	char string1[500] = "A melancholy-looking man, he had the appearance of one ";
+	char string2[] = "who has searched for the leak in life's gas-pipe with a lighted candle - PG Wodehouse";
+
+	char stringTotal[] = "A melancholy-looking man, he had the appearance of one who has searched for the leak in life's gas-pipe with a lighted candle - PG Wodehouse";
+
+	int returnValue = concatenateStrings(string1,string2);
+
+	if (returnValue != 0)
 	{
-		strLength = strings[e].length;
-		char string1[strLength], string2[strLength];
-		deep_copy_string(strings[e].value, string1, strLength);
-		deep_copy_string(strings[e].value, string2, strLength);
-		
-    length1 = sizeof(string1) / sizeof(string1[0]);
-    length2 = sizeof(string2) / sizeof(string2[0]);
-    totalLength = length1 + length2;				
-
-		//Use Function to concatinate two strings
-		
-		//returnValue = concatenateStrings(string1, string2);
-
-		if (returnValue != 0)
-		{
-			return 1;
-		}
-		else if (string1[0] == ' ' || string2[0] == ' ')
+		return 1;
+	}
+	int i;
+	while (stringTotal[i] != '\0')
+	{
+		if (string1[i] != stringTotal[i])
 		{
 			return -2;
 		}
-		else if (totalLength != (length1 + length2))
-		{
-			return -1;
-		}
-
+		i++;
 	}
 
 	return 0;
@@ -337,7 +332,8 @@ int generateReport(char* file)
 {
 	//Vars
 	FILE *outFile;
-	char *report = malloc(0*sizeof(char));
+	//Save to specified file
+	outFile = fopen(file,"a");
 	int functionResponse, i, numFunctions = 7, numErrors = 0;
 	struct TesterFunction functions[7] = {
 		{"Find Length Function",&testFindLength},
@@ -350,7 +346,7 @@ int generateReport(char* file)
 	};
 
 
-	#define add(line) addStrings(&report, line)
+	#define add(line) addStrings(outFile, line)
 
 
 
@@ -395,27 +391,14 @@ int generateReport(char* file)
 
 
 
-	printf("-----------------------------------------------------------------\n");
+	printf("\n\n\n\n\n\n\n\n\n-----------------------------------------------------------------\n");
 	printf("REPORT HAS BEEN SAVED in file '%s' \n",file);
-	printf("See Below For Report \n\n");
-	printf("%s", report);
 
 
 	
 
 
-	//Save to specified file
-	outFile = fopen(file,"w");
-
-	if (outFile == 0)
-	{
-		printf("There was an error saving to the file\n");
-		return 1;
-	}
-
-	fputs(report,outFile);
-
-	fclose(outFile);
+	printf("Output fclose - %d", fclose(outFile));
 
 	return 0;
 }
@@ -470,22 +453,25 @@ int generate_random_string_array(char* array, int array_length){
 	return 0;
 }
 
-int addStrings(char **array_main, char *array_add)
+int addStrings(FILE *outFile, char *array_add)
 {
 	
-	int length_main = strlen(*array_main);
-	int length_add = strlen(array_add)+1;
-	//Expand Array
-	*array_main = realloc(*array_main,length_main+length_add);	
-	//Check if expansion was successful
+	// int length_main = strlen(*array_main);
+	// int length_add = strlen(array_add)+1;
+	// //Expand Array
+	// *array_main = realloc(*array_main,length_main+length_add);	
+	// //Check if expansion was successful
 
-	deep_copy_string(array_add, *array_main + length_main*sizeof(char), length_add);
-	//int i;
-	// for (i=length_main; i<length_main+length_add; i++)
-	// {
-	// 	*array_main[i] = array_add[i-length_main];
-	// }
-	// //free(array_buffer);
+	// deep_copy_string(array_add, *array_main + length_main*sizeof(char), length_add);
+	// //int i;
+	// // for (i=length_main; i<length_main+length_add; i++)
+	// // {
+	// // 	*array_main[i] = array_add[i-length_main];
+	// // }
+	// // //free(array_buffer);
+	fputs(array_add,outFile);
+
+
 
 	
 	return 0;

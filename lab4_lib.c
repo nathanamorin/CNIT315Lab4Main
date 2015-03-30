@@ -101,53 +101,47 @@ int wordRemove(char* sentence_array, char* word)
     return 1;
   }
   
- int a = 0;
- int maxSize;
- while (sentence_array[a] != '\0')
+  int sizeSentence = 0;
+  while (sentence_array[sizeSentence] != '\0')
   {
-    a++;
-  }
-  maxSize = a;
-  
-  
-  a = 0;
-  int wordSize;
-  while (word[a] != '\0')
-  {
-    a++;
+    sizeSentence++;
   }
   
-  wordSize = a;
-  a = 0;
-  int b = 0;
-  int count = 0;
-  while (a < maxSize)
+  
+  int sizeWord = 0;
+  while (word[sizeWord] != '\0')
   {
-    b = 0;
-    count = 0;
-    if (sentence_array[a] == word[b])
+    sizeWord++;
+  }
+  
+  int head=-1,scanner, stop = sizeSentence - sizeWord;
+  int found = 0;
+  while (head<=stop && found == 0)
+  {
+    head++;
+    scanner = 0;
+    if (sentence_array[head] == word[0])
     {
-      while (b < wordSize)
+      while (scanner < sizeWord)
       {
-        if (sentence_array[a + b] == word[b])
+        found = 1;
+        if (sentence_array[head+scanner] != word[scanner])
         {
-          count++;
+          found = 0;
+          break;
         }
-        b++;
+        scanner++;
       }
     }
-    if (count == wordSize)
-    {
-      break;
-    }
-    a++;
   }
-  int c = a;
-  while (a <= (c+b))
+  int i=head;
+  while (sentence_array[i+sizeWord] != '\0')
   {
-    sentence_array[a] = '\0';
-    a++;
+   sentence_array[i] = sentence_array[i+sizeWord]; 
+   i++;
   }
+  sentence_array[i] = '\0';
+  
   return 0;
   
   
@@ -173,6 +167,8 @@ int vowelCheck(char* array, int* vowels)
      }
     
     printf("No. of vowels in %s = %d\n", array, *vowels);
+
+    return 0;
     
 }
 
@@ -193,18 +189,31 @@ int subString (char *array1, int index1, int index2)
 					return 1;
 				}
 
-			for (position = index1; position <= index2; position++)
+			// for (position = index1; position <= index2; position++)
+   //      {
+   //          printf("%c", array1[position]);
+						
+			// 			input2[i] = array1[position];
+			// 			i++;
+						
+
+   //      }
+        position = index1;
+        for (i=0; array1[i] != '\0'; i++, position++)
         {
-            printf("%c", array1[position]);
-						
-						input2[i] = array1[position];
-						i++;
-						
+          if (position <= index2)
+          {
+            array1[i] = array1[position];
+          }
+          else
+          {
+            array1[i] = NULL;
+          }
 
         }
 				
-					array1 = input2;
-         printf("\n");
+					// array1 = input2;
+     //     printf("\n");
 					return 0;
 		}
 
@@ -213,39 +222,26 @@ int subString (char *array1, int index1, int index2)
 int concatenateStrings(char* str1, char* str2)
 {
 	int firstArrayLength = 0;
-	char* concatenatedWord;
-	int counter = 0;
+	int secondArrayLength = 0;
 	
 	while (str1[firstArrayLength] != '\0')
 	{
 		firstArrayLength++;
 	}
+  printf("%d",firstArrayLength);
 	
-	while (str2[counter] != '\0')
+  while (str2[secondArrayLength] != '\0')
 	{
-		//str1[firstArrayLength] = str2[counter];
-		//firstArrayLength++;
-		counter++;
+		//printf("Copying - '%c'\n",str2[secondArrayLength]);
+    str1[firstArrayLength] = str2[secondArrayLength];
+    printf("%c\n", str1[firstArrayLength]);
+    secondArrayLength++;
+    firstArrayLength++;
 	}
-	firstArrayLength--;
-	
-	concatenatedWord = (char*)malloc(sizeof(char) * firstArrayLength+counter);
-	counter = 0;
-	firstArrayLength = 0;
-	while (str1[firstArrayLength] != '\0')
-	{
-		concatenatedWord[firstArrayLength] = str1[firstArrayLength];
-		firstArrayLength++;
-	}
-	while (str2[counter] != '\0')
-	{
-		concatenatedWord[firstArrayLength] = str2[counter];
-		firstArrayLength++;
-		counter++;
-	}
-	
-	concatenatedWord[firstArrayLength] = '\0';
-	printf("The concatenated string is: %s", concatenatedWord);
+  
+  str1[firstArrayLength] = '\0';
+
+
 	return 0;
 }
 

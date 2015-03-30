@@ -25,7 +25,7 @@ int vowelCheck(char* array, int* vowels);
   the function does not require any input
 */
 
-int subString(char* array1, int index1, int index2);
+int subString(char *array1, int index1, int index2);
 /*
   This function prints the characters in a substring
   The char array is made inside of the function
@@ -36,6 +36,7 @@ int concatenateStrings(char* str1, char* str2);
 /*
   This function combines two character arrays together
   the function requires two char arrays that already have characters in them
+  and that the first char array be long enuph to hold both strings
 */
 
 int printString();

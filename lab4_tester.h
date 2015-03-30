@@ -168,6 +168,6 @@ void deep_copy_string(char* array_from, char* array_to, int array_length);
 
 int generate_random_string(char* array, int array_length);
 
-int addStrings(char **array_main, char *array_add);
+int addStrings(FILE *outFile, char *array_add);
 
 int loadArrays();
