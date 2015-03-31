@@ -26,6 +26,24 @@ int isAlpha_handler(char *array);
 int main(){
 	/* Initialize */
 	
+	//Get art
+	FILE *file = fopen("ascii_art","r");
+
+	if (file)
+	{
+	char c = fgetc(file);
+	while(c != EOF)
+	{
+		printf("%c", c);
+		c = fgetc(file);
+	}
+	fclose(file);
+
+	}
+
+
+	//Print art
+
 	//Vars
 	int numFunctions = 7, response, arrayElements = 0;
 	
