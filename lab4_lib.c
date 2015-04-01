@@ -177,26 +177,26 @@ int vowelCheck(char* array, int* vowels)
 // This is the start of the substring portion of the lab
 // Code written by Ben Hail
 int subString (char *array1, int index1, int index2)
-    {
-        
-      int position;
-      int i = 0;
-      char input2[100];
-  
-      
+		{
+				
+			int position;
+			int i = 0;
+			char input2[100];
+	
+			
 
-    if (array1 == NULL)
-        {
-          return 1;
-        }
+		if (array1 == NULL)
+				{
+					return 1;
+				}
 
-      // for (position = index1; position <= index2; position++)
+			// for (position = index1; position <= index2; position++)
    //      {
    //          printf("%c", array1[position]);
-            
-      //      input2[i] = array1[position];
-      //      i++;
-            
+						
+			// 			input2[i] = array1[position];
+			// 			i++;
+						
 
    //      }
         position = index1;
@@ -212,38 +212,38 @@ int subString (char *array1, int index1, int index2)
           }
 
         }
-        
-          // array1 = input2;
+				
+					// array1 = input2;
      //     printf("\n");
-          return 0;
-    }
+					return 0;
+		}
 
 // This is the start of the function that concatenates two strings together
 // Code written by Sabrina Hsu
 int concatenateStrings(char* str1, char* str2)
 {
-  int firstArrayLength = 0;
-  int secondArrayLength = 0;
-  
-  while (str1[firstArrayLength] != '\0')
-  {
-    firstArrayLength++;
-  }
+	int firstArrayLength = 0;
+	int secondArrayLength = 0;
+	
+	while (str1[firstArrayLength] != '\0')
+	{
+		firstArrayLength++;
+	}
   printf("%d",firstArrayLength);
-  
+	
   while (str2[secondArrayLength] != '\0')
-  {
-    //printf("Copying - '%c'\n",str2[secondArrayLength]);
+	{
+		//printf("Copying - '%c'\n",str2[secondArrayLength]);
     str1[firstArrayLength] = str2[secondArrayLength];
     //printf("%c\n", str1[firstArrayLength]);
     secondArrayLength++;
     firstArrayLength++;
-  }
+	}
   
   str1[firstArrayLength] = '\0';
 
 
-  return 0;
+	return 0;
 }
 
 
@@ -297,24 +297,24 @@ int concatenateStrings(char* str1, char* str2)
 // Code written by Taylor Curtis
 int alphaNumeric(char ch)
 {
-  //scanf("%c", &ch);
-  
-  if (ch >= '0' && ch <= '9')
-  {
-    printf("|%c| is alphanumeric.\n", ch);
-  }
-  else if (ch >= 'A' && ch <= 'Z')
-  {
-    printf("|%c| is alphanumeric.\n", ch);
-  }
-  else if (ch >= 'a' && ch <= 'z')
-  {
-    printf("|%c| is alphanumeric.\n", ch);
-  }
-  else
-  {
-    printf("%c is not alphanumeric.\n", ch);
-  }
-  return 0;
+	//scanf("%c", &ch);
+	
+	if (ch >= '0' && ch <= '9')
+	{
+		printf("|%c| is alphanumeric.\n", ch);
+	}
+	else if (ch >= 'A' && ch <= 'Z')
+	{
+		printf("|%c| is alphanumeric.\n", ch);
+	}
+	else if (ch >= 'a' && ch <= 'z')
+	{
+		printf("|%c| is alphanumeric.\n", ch);
+	}
+	else
+	{
+		printf("%c is not alphanumeric.\n", ch);
+	}
+	return 0;
 }
 
