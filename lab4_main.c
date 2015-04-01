@@ -1,3 +1,16 @@
+/** lab4_main.c: Implements a front end for lab4_lib.c.
+ *
+ *
+ * Name: Nathan Morin
+ * Email: morinn@purdue.edu
+ * Course: CNIT 315
+ * Lab assignment: 4
+ * Date: 3/31/2015
+ *
+ * Collaborators: CNIT 315 9:30 Lab Group
+ *
+ */
+
 #include "lab4_lib.h"
 #include <stdio.h>
 #include "console.h"
